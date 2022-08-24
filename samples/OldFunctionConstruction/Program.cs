@@ -16,15 +16,31 @@ namespace FunctionConstruction {
       // Partially apply Reduce to create a sum calculation function
       var sumCalculator = curriedReduce(
           (result, newval) => result + newval)(0);
-      Func<int, int> nextValueGenerator = cur => cur + 2;
+
+      // In this case we can use a local function instead of the older-style lambda
+      //Func<int, int> nextValueGenerator = cur => cur + 2;
+      static int nextValueGenerator(int cur) => cur + 2;
       // Partially apply Sequence to generate series of odd numbers
       var oddNumbersSequence = curriedSequence(nextValueGenerator)(1);
+
+
+      // To use this local function syntax for the curried format,
+      // uncomment the Compose call below that has implicit generic parameters.
+      // These parameters must be specified just once to make the compiler
+      // happy. However, it's easier to stick to lambda syntax where
+      // Compose works just like that...
+      // static Func<int, bool> endChecker(int cutoff) =>
+      //   val => nextValueGenerator(val) > cutoff;
 
       Func<int, Func<int, bool>> endChecker =
           cutoff => val => nextValueGenerator(val) > cutoff;
 
       // Compose the odd number sequence with a function that 
       // finds an end to the sequence
+      // This is the version of the call with the implicit
+      // generic parameters (mentioned above)
+      // var oddNumbersSequenceFrom1ToX =
+      //     Compose<int, Func<int, bool>, IEnumerable<int>>(endChecker, oddNumbersSequence);
       var oddNumbersSequenceFrom1ToX =
           Compose(endChecker, oddNumbersSequence);
 
