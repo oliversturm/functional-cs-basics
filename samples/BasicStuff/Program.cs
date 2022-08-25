@@ -9,8 +9,6 @@ namespace BasicStuff {
       Console.WriteLine(Closures()(30));
 
       //LazyEvaluation( );
-
-      //ListComprehensions( );
     }
 
     static Func<int, int> Closures() {
@@ -50,19 +48,6 @@ namespace BasicStuff {
       // Sometimes we do something with b, but not all the time
       if (a() != 0)
         Console.WriteLine(b());
-    }
-
-    static IEnumerable<int> Sequence(int min, int max) {
-      for (int i = min; i <= max; i++) {
-        Console.WriteLine("Returning a sequence value");
-        yield return i;
-      }
-    }
-
-    static void ListComprehensions() {
-      var sequence = Sequence(1, 5);
-      foreach (var item in sequence)
-        Console.WriteLine("Sequence item: {0}", item);
     }
   }
 }
