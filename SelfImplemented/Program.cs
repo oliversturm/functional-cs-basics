@@ -48,7 +48,7 @@ namespace SelfImplemented {
     }
 
     static IEnumerable<Group<TGroupKey, TData>> Group<TGroupKey, TData>(
-        IEnumerable<TData> list, Converter<TData, TGroupKey> extractor) {
+        IEnumerable<TData> list, Converter<TData, TGroupKey> extractor) where TGroupKey : notnull {
       var dict = new Dictionary<TGroupKey, Group<TGroupKey, TData>>();
       foreach (TData data in list) {
         var extractedKey = extractor(data);
