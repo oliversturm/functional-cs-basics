@@ -11,4 +11,3 @@ Console.WriteLine($"Old Oli: {oli}");
 Console.WriteLine($"Older Oli: {nextYearOli}");
 
 public record Person(string FirstName, string Name, int Age);
-

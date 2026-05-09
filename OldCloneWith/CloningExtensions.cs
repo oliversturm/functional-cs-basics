@@ -13,7 +13,6 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library; if not, see <http://www.gnu.org/licenses/>.
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +54,9 @@ namespace OldCloneWith {
     static MethodInfo? GetAccessorMethod {
       get {
         if (getAccessorMethod == null) {
-          getAccessorMethod = typeof(CloningExtensions).GetMethod("GetAccessor", BindingFlags.Static | BindingFlags.NonPublic);
+          getAccessorMethod =
+            typeof(CloningExtensions).GetMethod("GetAccessor",
+              BindingFlags.Static | BindingFlags.NonPublic);
         }
         return getAccessorMethod;
       }
@@ -66,9 +67,9 @@ namespace OldCloneWith {
       var param = Expression.Parameter(typeof(object), "o");
       Expression<Func<object, object>> exp =
         Expression.Lambda<Func<object, object>>(
-        Expression.Convert(
-        Expression.Field(Expression.Convert(param, type), finfo!), typeof(object)),
-        param);
+          Expression.Convert(
+            Expression.Field(Expression.Convert(param, type), finfo!), typeof(object)),
+          param);
       return exp.Compile();
     }
 
@@ -97,8 +98,11 @@ namespace OldCloneWith {
     static MethodInfo? GetValueOrNullStringObjectMethod {
       get {
         if (getValueOrNullStringObjectMethod == null) {
-          var genericMethod = typeof(CloningExtensions).GetMethod("GetValueOrNull", BindingFlags.Static | BindingFlags.NonPublic);
-          getValueOrNullStringObjectMethod = genericMethod?.MakeGenericMethod(typeof(string), typeof(object));
+          var genericMethod =
+            typeof(CloningExtensions).GetMethod("GetValueOrNull",
+              BindingFlags.Static | BindingFlags.NonPublic);
+          getValueOrNullStringObjectMethod =
+            genericMethod?.MakeGenericMethod(typeof(string), typeof(object));
         }
         return getValueOrNullStringObjectMethod;
       }
@@ -107,7 +111,9 @@ namespace OldCloneWith {
     static Func<object, Dictionary<string, object>, object> CreateCreator(Type type) {
       var ctors = type.GetConstructors();
       if (ctors.Length > 1)
-        throw new InvalidOperationException(String.Format("Can't clone type {0} because it has more than one constructor.", type));
+        throw new InvalidOperationException(
+          String.Format("Can't clone type {0} because it has more than one constructor.",
+            type));
       var ctor = ctors[0];
       var cparams = ctor.GetParameters();
       var paramCount = cparams.Length;

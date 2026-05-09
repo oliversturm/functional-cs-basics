@@ -13,13 +13,13 @@ namespace AutomaticCurrying {
       Console.WriteLine(add10(32));
 
       Func<int, string, int> weirdCalc =
-          (val, text) => val * text.Length;
+        (val, text) => val * text.Length;
       var weirdCalcCurried = Curry(weirdCalc);
       var weirdCalc3 = weirdCalcCurried(3);
       Console.WriteLine(weirdCalc3("Hi"));
 
       Func<int, int, int, int> multiplyAndAdd =
-          (a, b, c) => a * b + c;
+        (a, b, c) => a * b + c;
 
       var curriedMultiplyAndAdd = Curry(multiplyAndAdd);
 
@@ -34,11 +34,13 @@ namespace AutomaticCurrying {
       return par1 => par2 => func(par1, par2);
     }
 
-    static Func<T1, Func<T2, Func<T3, T4>>> Curry<T1, T2, T3, T4>(Func<T1, T2, T3, T4> func) {
+    static Func<T1, Func<T2, Func<T3, T4>>> Curry<T1, T2, T3, T4>(
+      Func<T1, T2, T3, T4> func) {
       return par1 => par2 => par3 => func(par1, par2, par3);
     }
 
-    static Func<T1, Func<T2, Func<T3, Func<T4, T5>>>> Curry<T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5> func) {
+    static Func<T1, Func<T2, Func<T3, Func<T4, T5>>>> Curry<T1, T2, T3, T4, T5>(
+      Func<T1, T2, T3, T4, T5> func) {
       return par1 => par2 => par3 => par4 => func(par1, par2, par3, par4);
     }
   }

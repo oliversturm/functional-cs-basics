@@ -5,21 +5,19 @@ using System.Text;
 
 namespace ExtensionMethodsFromLINQ {
   class Program {
-
     static void Main(string[] args) {
-
       OutputWordCounts("hamlet", hamlet);
-
     }
 
     private static void OutputWordCounts(string title, string document) {
-      var wordlist = document.Split(new[] { " ", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+      var wordlist = document.Split(new[] { " ", Environment.NewLine },
+        StringSplitOptions.RemoveEmptyEntries);
 
-      var results = wordlist.Select(key => new { Key = key, Value = 1 }).
-          GroupBy(pair => pair.Key).
-          Select(group =>
-              group.Aggregate((group1, group2) =>
-                  new { Key = group1.Key, Value = group1.Value + group2.Value }));
+      var results = wordlist.Select(key => new { Key = key, Value = 1 })
+        .GroupBy(pair => pair.Key)
+        .Select(group =>
+          group.Aggregate((group1, group2) =>
+            new { Key = group1.Key, Value = group1.Value + group2.Value }));
 
       foreach (var pair in results)
         Console.WriteLine("Word: " + pair.Key + ", Count: " + pair.Value);
@@ -64,6 +62,5 @@ Giving to you no further personal power
 To business with the king, more than the scope
 Of these delated articles allow.
 Farewell, and let your haste commend your duty.";
-
   }
 }

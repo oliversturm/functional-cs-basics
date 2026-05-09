@@ -5,20 +5,19 @@ using System.Text;
 
 namespace FullyLINQed {
   class Program {
-
     static void Main(string[] args) {
-
       OutputWordCounts("hamlet", hamlet);
-
     }
 
     private static void OutputWordCounts(string title, string document) {
-      var wordlist = document.Split(new[] { " ", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+      var wordlist = document.Split(new[] { " ", Environment.NewLine },
+        StringSplitOptions.RemoveEmptyEntries);
 
       var results =
-          from listword in wordlist
-          group listword by listword into g
-          select new { Key = g.Key, Value = g.Count() };
+        from listword in wordlist
+        group listword by listword
+        into g
+        select new { Key = g.Key, Value = g.Count() };
 
       foreach (var pair in results) {
         Console.WriteLine("Word: " + pair.Key + ", Count: " + pair.Value);
@@ -64,6 +63,5 @@ Giving to you no further personal power
 To business with the king, more than the scope
 Of these delated articles allow.
 Farewell, and let your haste commend your duty.";
-
   }
 }

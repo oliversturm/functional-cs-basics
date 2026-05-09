@@ -1,9 +1,9 @@
 ﻿namespace Extensions {
   public static class Enumerable {
     extension<T>(IEnumerable<T> source) {
-        public void OlisExtra() {
-          Console.WriteLine("Executing Oli's extra function");
-        }
+      public void OlisExtra() {
+        Console.WriteLine("Executing Oli's extra function");
+      }
     }
   }
 

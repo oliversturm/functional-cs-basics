@@ -1,8 +1,7 @@
 ﻿using FCSlib;
 using LoggerDemo;
 
-List<Order> orders =
-[
+List<Order> orders = [
   new(Date: new DateTime(2024, 6, 3), Value: 29.9m),
   new(Date: new DateTime(2024, 6, 3), Value: 18.6m),
   new(Date: new DateTime(2024, 6, 4), Value: 119.99m),

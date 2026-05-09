@@ -12,18 +12,18 @@ namespace ManualCurrying {
 
     private static void DelegateImplementation() {
       Func<int, int, int> add =
-          delegate (int x, int y) {
-            return x + y;
-          };
+        delegate(int x, int y) {
+          return x + y;
+        };
 
       Console.WriteLine(add(10, 20));
 
       Func<int, Func<int, int>> curriedAdd =
-          delegate (int x) {
-            return delegate (int y) {
-              return add(x, y);
-            };
+        delegate(int x) {
+          return delegate(int y) {
+            return add(x, y);
           };
+        };
 
       Console.WriteLine(curriedAdd(15)(5));
 
@@ -36,7 +36,7 @@ namespace ManualCurrying {
       Console.WriteLine(add(10, 20));
 
       Func<int, Func<int, int>> curriedAdd =
-          x => y => add(x, y);
+        x => y => add(x, y);
       Console.WriteLine(curriedAdd(15)(5));
 
       Func<int, int> add5 = curriedAdd(5);

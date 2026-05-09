@@ -23,12 +23,11 @@ namespace SelfImplemented {
 
       Console.WriteLine("Sum of mapped values: {0}", overallSum);
 
-
       //OutputWordCounts("hamlet", hamlet);
     }
 
     static IEnumerable<R> Map<T, R>(Converter<T, R> function,
-        IEnumerable<T> list) {
+      IEnumerable<T> list) {
       foreach (T sourceVal in list)
         yield return function(sourceVal);
     }
@@ -40,7 +39,7 @@ namespace SelfImplemented {
     }
 
     static R Reduce<T, R>(Func<R, T, R> accumulator, R startVal,
-        IEnumerable<T> list) {
+      IEnumerable<T> list) {
       R result = startVal;
       foreach (T sourceVal in list)
         result = accumulator(result, sourceVal);
@@ -48,7 +47,8 @@ namespace SelfImplemented {
     }
 
     static IEnumerable<Group<TGroupKey, TData>> Group<TGroupKey, TData>(
-        IEnumerable<TData> list, Converter<TData, TGroupKey> extractor) where TGroupKey : notnull {
+      IEnumerable<TData> list, Converter<TData, TGroupKey> extractor)
+      where TGroupKey : notnull {
       var dict = new Dictionary<TGroupKey, Group<TGroupKey, TData>>();
       foreach (TData data in list) {
         var extractedKey = extractor(data);
@@ -61,10 +61,10 @@ namespace SelfImplemented {
 
     private static void OutputWordCounts(string title, string document) {
       var wordlist = document.Split(new[] { " ", Environment.NewLine },
-          StringSplitOptions.RemoveEmptyEntries);
+        StringSplitOptions.RemoveEmptyEntries);
 
       var interimResult =
-          Map(word => new KeyValuePair<string, int>(word, 1), wordlist);
+        Map(word => new KeyValuePair<string, int>(word, 1), wordlist);
 
       var groupedResult = Group(interimResult, pair => pair.Key);
 
@@ -72,8 +72,9 @@ namespace SelfImplemented {
 
       foreach (var group in groupedResult) {
         var resultPair = Reduce(
-            (val1, val2) => new KeyValuePair<string, int>(val1.Key, val1.Value + val2.Value),
-            new KeyValuePair<string, int>(group.Key, 0), group);
+          (val1, val2) =>
+            new KeyValuePair<string, int>(val1.Key, val1.Value + val2.Value),
+          new KeyValuePair<string, int>(group.Key, 0), group);
         result.Add(resultPair);
       }
 
@@ -133,7 +134,5 @@ Giving to you no further personal power
 To business with the king, more than the scope
 Of these delated articles allow.
 Farewell, and let your haste commend your duty.";
-
-
   }
 }

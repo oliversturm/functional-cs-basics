@@ -16,9 +16,9 @@ namespace Composition {
     }
 
     static Func<TSource, TEndResult> Compose<TSource, TIntermediateResult, TEndResult>(
-        Func<TSource, TIntermediateResult> func1, Func<TIntermediateResult, TEndResult> func2) {
+      Func<TSource, TIntermediateResult> func1,
+      Func<TIntermediateResult, TEndResult> func2) {
       return sourceParam => func2(func1(sourceParam));
     }
-
   }
 }

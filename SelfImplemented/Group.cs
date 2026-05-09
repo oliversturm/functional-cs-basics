@@ -3,36 +3,36 @@ using System.Collections.Generic;
 using System.Collections;
 
 namespace SelfImplemented {
-	public class Group<TGroupKey, TData> : IEnumerable<TData> {
-		public Group(TGroupKey key) {
-			this.key = key;
-			this.innerList = new List<TData>( );
-		}
+  public class Group<TGroupKey, TData> : IEnumerable<TData> {
+    public Group(TGroupKey key) {
+      this.key = key;
+      this.innerList = new List<TData>();
+    }
 
-		private TGroupKey key;
-		public TGroupKey Key {
-			get { return key; }
-		}
+    private TGroupKey key;
+    public TGroupKey Key {
+      get { return key; }
+    }
 
-		private List<TData> innerList;
-		public void Add(TData data) {
-			innerList.Add(data);
-		}
+    private List<TData> innerList;
+    public void Add(TData data) {
+      innerList.Add(data);
+    }
 
-		#region IEnumerable<TData> Members
+    #region IEnumerable<TData> Members
 
-		IEnumerator<TData> IEnumerable<TData>.GetEnumerator( ) {
-			return ((IEnumerable<TData>) innerList).GetEnumerator( );
-		}
+    IEnumerator<TData> IEnumerable<TData>.GetEnumerator() {
+      return ((IEnumerable<TData>)innerList).GetEnumerator();
+    }
 
-		#endregion
+    #endregion
 
-		#region IEnumerable Members
+    #region IEnumerable Members
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator( ) {
-			return ((IEnumerable) innerList).GetEnumerator( );
-		}
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
+      return ((IEnumerable)innerList).GetEnumerator();
+    }
 
-		#endregion
-	}
+    #endregion
+  }
 }

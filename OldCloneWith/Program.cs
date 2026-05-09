@@ -10,8 +10,7 @@ var oli = new Person("Oli", "Sturm", 27);
 
 outputPerson(oli);
 
-var nextYearOli = oli.CloneWith(new Dictionary<string, object> {
-  { "Age", oli.Age + 1 }
-});
+var nextYearOli =
+  oli.CloneWith(new Dictionary<string, object> { { "Age", oli.Age + 1 } });
 
 outputPerson(nextYearOli);
