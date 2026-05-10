@@ -17,7 +17,7 @@ internal class Program {
 
   private static void Process(int start) =>
     Add(start, start)
-      .Bind(x => Subtract(x, 27))
+      .Bind(x => Subtract(x, 28))
       .Bind(x => Multiply(x, 3))
       .Bind(x => Divide(100, x))
       .Switch(
@@ -27,5 +27,6 @@ internal class Program {
 
   private static void Main(string[] args) {
     Process(21);
+    Process(14);
   }
 }
