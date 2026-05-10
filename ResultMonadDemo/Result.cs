@@ -20,18 +20,15 @@ public sealed record ResultOk<T, E>(T Value) : Result<T, E>;
 public sealed record ResultFail<T, E>(E Error) : Result<T, E>;
 
 public static class ResultModule {
-  public static T Ok<T>(T v) {
-    return v;
-  }
+  public static T Ok<T>(T v) => v;
+
+  public static Result<T?, E> Ok<T, E>(T v)
+    => new ResultOk<T?, E>(v);
 
   public static Result<T?, E> OkNone<T, E>()
-    where T : class? {
-    return new ResultOk<T?, E>(null);
-  }
+    => new ResultOk<T?, E>(default);
 
-  public static E Fail<E>(E e) {
-    return e;
-  }
+  public static E Fail<E>(E e) => e;
 }
 
 public static class ResultExtensions {
